@@ -1,0 +1,225 @@
+:root {
+  --primary-color: #1976d2;
+  --secondary-color: #424242;
+  --accent-color: #ffeb3b;
+  --ttt-bg: #fff;
+  --ttt-board-bg: #f7fafd;
+  --ttt-border: #e0e0e0;
+  --ttt-x-color: var(--primary-color);
+  --ttt-o-color: var(--secondary-color);
+  --ttt-win-bg: var(--accent-color);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ttt-bg: #1a1a1a;
+    --ttt-board-bg: #232a35;
+    --ttt-border: #2d3748;
+    --ttt-x-color: #90caf9;
+    --ttt-o-color: #eeeeee;
+  }
+}
+
+body, html, #root {
+  min-height: 100vh;
+  background: var(--ttt-bg);
+  margin: 0;
+  font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+  color: var(--secondary-color);
+}
+
+.ttt-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: var(--ttt-bg);
+  justify-content: center;
+  padding: 1rem;
+}
+
+.ttt-title {
+  font-size: 2.1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.02em;
+  color: var(--primary-color);
+  text-align: center;
+}
+
+.ttt-status {
+  font-size: 1.15rem;
+  margin-bottom: 1.7rem;
+  color: var(--secondary-color);
+  background: #fafafa;
+  padding: 0.6rem 1.6rem;
+  border-radius: 10px;
+  box-shadow: 0 1px 6px 0 rgba(33,40,53,0.07);
+  min-width: 175px;
+}
+
+/* Board and cells */
+.ttt-board-outer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  margin-bottom: 1.3rem;
+}
+
+.ttt-board {
+  display: grid;
+  grid-template-columns: repeat(3, 60px);
+  grid-template-rows: repeat(3, 60px);
+  gap: 0.35rem;
+  background: var(--ttt-board-bg);
+  box-shadow: 0 2px 16px rgba(60,60,60,0.05);
+  border-radius: 18px;
+  padding: 0.6rem;
+}
+
+@media (max-width: 499px) {
+  .ttt-board {
+    grid-template-columns: repeat(3, 22vw);
+    grid-template-rows: repeat(3, 22vw);
+    padding: 0.2rem;
+  }
+}
+
+/* Cell wrapper: highlight for winning */
+.ttt-cell-wrap {
+  width: 100%;
+  height: 100%;
+  border-radius: 13px;
+}
+.ttt-win .ttt-cell {
+  background: var(--accent-color);
+  color: #232a35 !important;
+  font-weight: bold;
+  /* Add a subtle bounce for the winner */
+  animation: ttt-pop 0.6s;
+}
+
+@keyframes ttt-pop {
+  0% { transform: scale(1); }
+  13% { transform: scale(1.14); }
+  33% { transform: scale(0.96);}
+  60% { transform: scale(1.09);}
+  100% { transform: scale(1);}
+}
+
+.ttt-cell {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  border: 2px solid var(--ttt-border);
+  border-radius: 10px;
+  outline: none;
+  font-size: 2.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgba(44,53,63,0.03);
+  transition: background 0.14s, color 0.12s, border 0.17s;
+  user-select: none;
+}
+.ttt-cell:disabled {
+  cursor: not-allowed;
+  opacity: 0.78;
+}
+
+/* X and O coloring for contrast */
+.ttt-x {
+  color: var(--ttt-x-color);
+  font-weight: 700;
+  font-size: 2.09rem;
+}
+
+.ttt-o {
+  color: var(--ttt-o-color);
+  font-weight: 700;
+  font-size: 2.09rem;
+}
+
+.ttt-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 0.7rem;
+  margin-top: 0.4rem;
+  margin-bottom: 1.3rem;
+}
+
+.ttt-btn {
+  appearance: none;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 0.55em 1.5em;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 0.5px 3px 0 rgba(30,66,122,0.09);
+  transition: background 0.15s, color 0.14s, box-shadow 0.13s;
+}
+
+.ttt-btn-accent {
+  background: var(--accent-color);
+  color: #232a35;
+  font-weight: 800;
+}
+.ttt-btn-accent:hover,
+.ttt-btn-accent:focus {
+  background: #fff89c;
+  box-shadow: 0 2px 7px 0 rgba(30, 66, 122, 0.08);
+}
+
+.ttt-btn:hover,
+.ttt-btn:focus {
+  background: #286ad2;
+  color: #fff;
+  box-shadow: 0 3px 9px 0 rgba(20, 64, 180, 0.09);
+}
+
+.ttt-footer {
+  margin-top: auto;
+  font-size: 0.97rem;
+  color: #b0b0b0;
+  padding: 2.3rem 0 0.5rem 0;
+  text-align: center;
+}
+
+@media (max-width: 499px) {
+  .ttt-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.25rem;
+  }
+  .ttt-status {
+    font-size: 1rem;
+    min-width: unset;
+    padding: 0.4rem 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .ttt-controls .ttt-btn {
+    font-size: 0.93rem;
+    padding: 0.35em 1em;
+  }
+  .ttt-footer {
+    font-size: 0.80rem;
+    padding: 1.2rem 0 0.45rem 0;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  background: #f8f8f8;
+}
+::-webkit-scrollbar-thumb {
+  background: #d3dae6;
+  border-radius: 8px;
+}
